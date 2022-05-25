@@ -1,0 +1,12 @@
+jtype: Flow
+with:
+  protocol: grpc
+executors:
+  - name: encoder
+    uses: jinahub+docker://TransformerTorchEncoder/v0.4
+    resources:
+      memory: 8G  # jcloud only assigns 100m by default. we need to up this
+  - name: indexer
+    uses: jinahub+docker://SimpleIndexer/v0.15  # our needs are simple
+    uses_metas:
+      workspace: workspace  # store the index in the "workspace" directory
